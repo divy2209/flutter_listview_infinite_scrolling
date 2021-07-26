@@ -10,7 +10,7 @@ class DataProvider with ChangeNotifier {
   //int totalPages = 0;
   //int pageSize = 25;
 
-  List<Entry> get allUsers => _dataFetcher.entries;
+  List<Tournament> get allUsers => _dataFetcher.data.tournaments;
   //double get totalRecords => _dataFetcher.totalRecords.toDouble();
 
   LoadMoreStatus _loadMoreStatus = LoadMoreStatus.STABLE;
@@ -33,11 +33,11 @@ class DataProvider with ChangeNotifier {
     if (true /*(totalPages == 0) || pageNumber <= totalPages*/) {
       DataModel itemModel =
           await _apiService.getData(/*pageNumber*/);
-      if (_dataFetcher.entries == null) {
+      if (_dataFetcher.data.tournaments == null) {
         //totalPages =  ((itemModel.totalRecords - 1) / pageSize).ceil();
         _dataFetcher = itemModel;
       } else {        
-        _dataFetcher.entries.addAll(itemModel.entries);
+        _dataFetcher.data.tournaments.addAll(itemModel.data.tournaments);
         _dataFetcher = _dataFetcher;
 
         // One load more is done will make it status as stable.

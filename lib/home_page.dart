@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_listview_infinite_scrolling/provider/data_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'models/data_model.dart' as RadioModel;
+//import 'models/data_model.dart' as RadioModel;
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Consumer<DataProvider>(
         builder: (context, usersModel, child) {
-          if (usersModel.allUsers != null && usersModel.allUsers.length > 0) {
+          if (true /*usersModel.allUsers != null && usersModel.allUsers.length > 0*/) {
             return _listView(usersModel);
           }
 
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
             }
 
             //return _buildRow(dataProvider.allUsers[index]);
-            return ListTile(title: Text(dataProvider.allUsers[index].api),);
+            return ListTile(title: Text(dataProvider.allUsers[index].gameName),);
           },
           separatorBuilder: (context, index) {
             return Divider();
