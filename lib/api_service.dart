@@ -6,12 +6,12 @@ import 'config.dart';
 import 'models/data_model.dart';
 
 class APIService {
-  Future<DataModel> getData(pageNumber) async {
-    String url =
-        "/GetRadios?pageSize=15&pageNumber=$pageNumber";
+  Future<DataModel> getData(/*pageNumber*/) async {
+    //String url =
+    //    "/GetRadios?pageSize=15&pageNumber=$pageNumber";
 
-    print("URL : $url");
-    final response = await http.get(Config.apiURL + url);
+    //print("URL : $url");
+    final response = await http.get(Config.apiURL);
     if (response.statusCode == 200) {
       return DataModel.fromJson(
         json.decode(response.body),

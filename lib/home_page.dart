@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ScrollController _scrollController = new ScrollController();
-  int _page = 1;
+  //int _page = 1;
   bool isLoading = false;
 
   @override
@@ -20,13 +20,13 @@ class _HomePageState extends State<HomePage> {
 
     var videosBloc = Provider.of<DataProvider>(context, listen: false);
     videosBloc.resetStreams();
-    videosBloc.fetchAllUsers(_page);
+    videosBloc.fetchAllUsers(/*_page*/);
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         videosBloc.setLoadingState(LoadMoreStatus.LOADING);
-        videosBloc.fetchAllUsers(++_page);
+        videosBloc.fetchAllUsers(/*++_page*/);
       }
     });
   }
@@ -58,12 +58,13 @@ class _HomePageState extends State<HomePage> {
           shrinkWrap: true,
           physics: const AlwaysScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            if ((index == dataProvider.allUsers.length - 1) &&
-                dataProvider.allUsers.length < dataProvider.totalRecords) {
+            if ((index == dataProvider.allUsers.length - 1) /*&&
+                dataProvider.allUsers.length < dataProvider.totalRecords*/) {
               return Center(child: CircularProgressIndicator());
             }
 
-            return _buildRow(dataProvider.allUsers[index]);
+            //return _buildRow(dataProvider.allUsers[index]);
+            return ListTile(title: Text(dataProvider.allUsers[index].api),);
           },
           separatorBuilder: (context, index) {
             return Divider();
@@ -71,9 +72,9 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-  Widget _buildRow(RadioModel.Radio radioModel) {
+  /*Widget _buildRow(RadioModel radioModel) {
     return ListTile(title: new Text(radioModel.radioName));
-  }
+  }*/
 
   @override
   void dispose() {

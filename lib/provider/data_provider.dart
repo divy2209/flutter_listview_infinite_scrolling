@@ -7,11 +7,11 @@ enum LoadMoreStatus { LOADING, STABLE }
 class DataProvider with ChangeNotifier {
   APIService _apiService;
   DataModel _dataFetcher;
-  int totalPages = 0;
-  int pageSize = 25;
+  //int totalPages = 0;
+  //int pageSize = 25;
 
-  List<Radio> get allUsers => _dataFetcher.data;
-  double get totalRecords => _dataFetcher.totalRecords.toDouble();
+  List<Entry> get allUsers => _dataFetcher.entries;
+  //double get totalRecords => _dataFetcher.totalRecords.toDouble();
 
   LoadMoreStatus _loadMoreStatus = LoadMoreStatus.STABLE;
   getLoadMoreStatus() => _loadMoreStatus;
@@ -29,15 +29,15 @@ class DataProvider with ChangeNotifier {
     _initStreams();
   }
 
-  fetchAllUsers(pageNumber) async {
-    if ((totalPages == 0) || pageNumber <= totalPages) {   
+  fetchAllUsers(/*pageNumber*/) async {
+    if (true /*(totalPages == 0) || pageNumber <= totalPages*/) {
       DataModel itemModel =
-          await _apiService.getData(pageNumber);
-      if (_dataFetcher.data == null) {
-        totalPages =  ((itemModel.totalRecords - 1) / pageSize).ceil();        
+          await _apiService.getData(/*pageNumber*/);
+      if (_dataFetcher.entries == null) {
+        //totalPages =  ((itemModel.totalRecords - 1) / pageSize).ceil();
         _dataFetcher = itemModel;
       } else {        
-        _dataFetcher.data.addAll(itemModel.data);
+        _dataFetcher.entries.addAll(itemModel.entries);
         _dataFetcher = _dataFetcher;
 
         // One load more is done will make it status as stable.
@@ -47,11 +47,11 @@ class DataProvider with ChangeNotifier {
       notifyListeners();
     }
     
-    if(pageNumber > totalPages){
+    /*if(pageNumber > totalPages){
       // One load more is done will make it status as stable.
       setLoadingState(LoadMoreStatus.STABLE);      
       notifyListeners();
-    }    
+    }*/
   }
 
   setLoadingState(LoadMoreStatus loadMoreStatus) {

@@ -1,3 +1,3 @@
 class Config {
-   static final String apiURL = '';
+   static final String apiURL = 'https://api.publicapis.org/entries';
 }
